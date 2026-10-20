@@ -1,0 +1,266 @@
+:root {
+  --blue-main: #2351f5;
+  --border-line: rgba(255, 255, 255, 0.2);
+  --text-light: #ffffff;
+  --text-dim: #93c5fd;
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--blue-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Checkbox oculto */
+.menu-checkbox {
+  display: none;
+}
+
+/* Contenedor Principal */
+.card-wrapper {
+  background-color: var(--blue-main);
+  color: var(--text-light);
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Header / Navbar */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.5rem 4rem;
+  border-bottom: 1px solid var(--border-line);
+  position: relative;
+  z-index: 20;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.dot {
+  font-size: 0.6rem;
+}
+
+/* Botón interactivo (Label) */
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  z-index: 30;
+  padding: 5px;
+}
+
+.menu-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Control de iconos: Por defecto se muestra la hamburguesa y se oculta la X */
+.icon-close {
+  display: none;
+}
+.icon-hamburger {
+  display: block;
+}
+
+/* MENÚ DESPLEGABLE LATERAL (Estado cerrado) */
+.dropdown-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  background-color: var(--blue-main);
+  border-left: 1px solid var(--border-line);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 15;
+}
+
+.menu-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.menu-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.menu-links a:hover {
+  opacity: 0.7;
+}
+
+/* ==========================================================
+   ESTADOS ACTIVOS CUANDO SE PRESIONA EL MENÚ (CHECKBOX CHECKED)
+   ========================================================== */
+
+/* 1. Mueve el menú hacia la pantalla (lo abre) */
+.menu-checkbox:checked ~ .dropdown-menu {
+  transform: translateX(0);
+}
+
+/* 2. Oculta la hamburguesa y muestra la X */
+.menu-checkbox:checked ~ .header .menu-btn .icon-hamburger {
+  display: none;
+}
+
+.menu-checkbox:checked ~ .header .menu-btn .icon-close {
+  display: block;
+}
+
+/* Grid Layout Principal */
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  flex: 1;
+}
+
+@media (min-width: 900px) {
+  .grid-layout {
+    grid-template-columns: 1.1fr 1.9fr;
+  }
+}
+
+/* Hero (Izquierda) */
+.hero-section {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 900px) {
+  .hero-section {
+    border-right: 1px solid var(--border-line);
+  }
+}
+
+.hero-title {
+  font-size: clamp(3rem, 4.5vw, 4.2rem);
+  font-weight: 600;
+  line-height: 1.08;
+  margin-bottom: 2rem;
+  letter-spacing: -1px;
+}
+
+.hero-text {
+  font-size: 1rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  max-width: 440px;
+}
+
+/* Cuadrícula 2x2 de estadísticas (Derecha) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.stat-box {
+  padding: 3rem 2.5rem;
+  border-top: 1px solid var(--border-line);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+@media (min-width: 600px) {
+  .stat-box:nth-child(odd) {
+    border-right: 1px solid var(--border-line);
+  }
+  .stat-box:nth-child(1),
+  .stat-box:nth-child(2) {
+    border-top: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .stat-box {
+    border-top: none;
+  }
+  .stat-box:nth-child(3),
+  .stat-box:nth-child(4) {
+    border-top: 1px solid var(--border-line);
+  }
+}
+
+.stat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+}
+
+.stat-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.stat-number {
+  font-size: 2.8rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.stat-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.stat-desc {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* Footer interno */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+  border-top: 1px solid var(--border-line);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
